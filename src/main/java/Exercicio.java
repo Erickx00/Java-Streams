@@ -19,10 +19,20 @@ public class Exercicio {
             int gols = r.nextInt(0, 10);
             jogadores.add(new Jogador(nome, posicao, idade, time, gols));
         }
-        // imprimeTodos(jogadores) por ;
+        // filtrarTodosJogadores
+        filtrarTodosJogadores(jogadores);
+
+        // filtrar por time
         filtraPorTime(jogadores, "Flamengo");
 
+
+
     }
+
+    private static void filtrarTodosJogadores(List<Jogador> jogadores) {
+        jogadores.forEach(System.out::println);
+    }
+
 
     private static void filtraPorTime(List<Jogador> jogadores, String flamengo) {
         jogadores.stream()
@@ -30,6 +40,8 @@ public class Exercicio {
                 .forEach(j -> System.out.println("Jogador: "+ j.getNome() + " || "+ "Time: " + j.getTime()));
 
     }
+
+
 
 
 }

@@ -45,11 +45,17 @@ public class Exercicio {
         filtrarJogadoresTimesAgrupado(jogadores);
         System.out.println();
 
+        System.out.println("Filtrar media dos jogadores\n");
+        // calcular média de idade dos jogadores
+        filtrarMediaIdadeJogadores(jogadores);
+        System.out.println();
+
+
+
 
 
 
     }
-
 
 
 
@@ -88,6 +94,16 @@ public class Exercicio {
             System.out.println("-".repeat(20));
         });
     }
+
+    private static void filtrarMediaIdadeJogadores(List<Jogador> jogadores) {
+        double mediaIdade = jogadores.stream()
+                .mapToInt(Jogador::getIdade)
+                .average()
+                .orElse(0.0);
+
+        System.out.printf("Media de idade dos jogadores: %.2f anos\n", mediaIdade);
+    }
+
 
 
 

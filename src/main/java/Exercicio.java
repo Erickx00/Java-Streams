@@ -25,30 +25,35 @@ public class Exercicio {
         System.out.println("Filtrar Todos os jogadores\n");
         // filtrarTodosJogadores
         filtrarTodosJogadores(jogadores);
-        System.out.println();
+        System.out.println("-".repeat(100));
 
         System.out.println("Filtrar jogadores por time\n");
         // filtrar por time
         filtraPorTime(jogadores, "Flamengo");
-        System.out.println();
+        System.out.println("-".repeat(100));
 
 
         System.out.println("Filtrar jogadores por time e gols acima de 1\n");
         // imprimir jogadores de um determinado time que tenham mais que um
         //determinado número de gols marcados
         filtrarPorTimeAndDeterminadoGols(jogadores, "Palmeiras");
-        System.out.println();
+        System.out.println("-".repeat(100));
 
         System.out.println("Filtrar jogadores agrupando os time\n");
         // imprimir todos os jogadores, agrupando-os por time
 
         filtrarJogadoresTimesAgrupado(jogadores);
-        System.out.println();
+        System.out.println("-".repeat(100));
 
-        System.out.println("Filtrar media dos jogadores\n");
+        System.out.println("Filtrar media de idade dos jogadores\n");
         // calcular média de idade dos jogadores
         filtrarMediaIdadeJogadores(jogadores);
-        System.out.println();
+        System.out.println("-".repeat(100));
+
+        System.out.println("Filtrar media de idade dos jogadores por time\n");
+        //calcular média de idade dos jogadores de um time
+        filtrarMediaIdadeJogadorePorTime(jogadores, "Flamengo");
+        System.out.println("-".repeat(100));
 
 
 
@@ -56,6 +61,7 @@ public class Exercicio {
 
 
     }
+
 
 
 
@@ -102,6 +108,16 @@ public class Exercicio {
                 .orElse(0.0);
 
         System.out.printf("Media de idade dos jogadores: %.2f anos\n", mediaIdade);
+    }
+
+    private static void filtrarMediaIdadeJogadorePorTime(List<Jogador> jogadores, String flamengo) {
+        double mediaIdade = jogadores.stream()
+                .filter(e -> e.getTime().equals(flamengo))
+                .mapToInt(Jogador::getIdade)
+                .average()
+                .orElse(0.0);
+
+        System.out.printf("- Media de idade dos jogaodore do %s: %.2f anos\n", flamengo, mediaIdade);
     }
 
 

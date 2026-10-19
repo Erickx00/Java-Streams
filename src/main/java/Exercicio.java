@@ -60,7 +60,13 @@ public class Exercicio {
 
 
         System.out.println("Filtrar time do jogador mais velho\n");
+        // imprimir o time do jogador mais velho
         filtrarTimeJogadorMaisVelho(jogadores);
+        System.out.println("-".repeat(100));
+
+        System.out.println("Filtrar jogador mais novo\n");
+        //imprimir jogador mais novo
+        filtrarJogadorMaisNovo(jogadores);
         System.out.println("-".repeat(100));
 
 
@@ -143,6 +149,12 @@ public class Exercicio {
         assert jogador != null;
         System.out.println("Time: " + jogador.getTime()+"\n");
         filtraPorTime(jogadores, jogador.getTime());
+    }
+
+    private static void filtrarJogadorMaisNovo(List<Jogador> jogadores) {
+        jogadores.stream()
+                .min(Comparator.comparingInt(Jogador::getIdade))
+                .ifPresent(j -> System.out.printf("Jogador mais novo : %s (%s anos)", j.getNome(), j.getIdade()));
     }
 
 

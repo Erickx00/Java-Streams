@@ -52,9 +52,16 @@ public class Exercicio {
         filtrarMediaIdadeJogadorePorTime(jogadores, "Flamengo");
         System.out.println("-".repeat(100));
 
-        System.out.println("Filtrar jogador mais velho");
+        System.out.println("Filtrar jogador mais velho\n");
         //imprimir jogador mais velho
         filtrarJogadorMaisVelho(jogadores);
+        System.out.println("-".repeat(100));
+
+
+
+        System.out.println("Filtrar time do jogador mais velho\n");
+        filtrarTimeJogadorMaisVelho(jogadores);
+        System.out.println("-".repeat(100));
 
 
 
@@ -62,6 +69,7 @@ public class Exercicio {
 
 
     }
+
 
 
 
@@ -126,6 +134,18 @@ public class Exercicio {
                 .max(Comparator.comparingInt(Jogador::getIdade))
                 .ifPresent(j -> System.out.println("Jogador mais velho: " + j.getNome() + " (" + j.getIdade() + " anos)"));
     }
+
+    private static void filtrarTimeJogadorMaisVelho(List<Jogador> jogadores) {
+        Jogador jogador = jogadores.stream()
+                .max(Comparator.comparing(Jogador::getIdade))
+                .orElse(null);
+
+        assert jogador != null;
+        System.out.println("Time: " + jogador.getTime()+"\n");
+        filtraPorTime(jogadores, jogador.getTime());
+    }
+
+
 
 
 

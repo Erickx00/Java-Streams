@@ -4,13 +4,12 @@ import java.util.Random;
 
 public class Exercicio {
     public static void main(String[] args) {
-        String[] posicoes = {"Goleiro", "Defensor", "Meio-C ampista", " Atacante" };
-        String[] times = {"Flamengo", "São Paulo", "Palmeir as", " Santos", " Corinthians", " Grêmio", " Internacional", " F luminense", " Atlético Mineiro", " Cruzeiro" };
-        String[] nomes = {"Neymar", "Gabriel Barbosa", "Alisson", "Ma rquinhos", " Casemiro",
+        String[] posicoes = {"Goleiro", "Defensor", "Meio-Campista", " Atacante" };
+        String[] times = {"Flamengo", "São Paulo", "Palmeiras", " Santos", " Corinthians", " Grêmio", " Internacional", " Fluminense", " Atlético Mineiro", " Cruzeiro" };
+        String[] nomes = {"Neymar", "Gabriel Barbosa", "Alisson", "Marquinhos", " Casemiro", "Roberto Firmino", "Thiago Silva", "Richarl ison", " Lucas Paquetá", " Éder Militão", "Vinícius Júnior", "Fabinho", "Douglas Luiz", " Everton Ribeiro", " Ederson", "Gabriel Jesus", "Danilo", "Rodrygo", "Fred", " Reinier" };
 
-
-                "Roberto Firmino", "Thiago Silva", "Richarl ison", " Lucas Paquetá", " Éder Militão", "Vinícius Júnior", "Fabinho", "Douglas Lui z", " Everton Ribeiro", " Ederson", "Gabriel Jesus", "Danilo", "Rodrygo", "Fre d", " Reinier" };
         List<Jogador> jogadores = new ArrayList<>();
+
         for (int i = 0; i < 20; i++) {
             Random r = new Random();
             String posicao = posicoes[r.nextInt(posicoes.length)];
@@ -20,8 +19,15 @@ public class Exercicio {
             int gols = r.nextInt(0, 10);
             jogadores.add(new Jogador(nome, posicao, idade, time, gols));
         }
+        // imprimeTodos(jogadores) por ;
+        filtraPorTime(jogadores, "Flamengo");
 
+    }
 
+    private static void filtraPorTime(List<Jogador> jogadores, String flamengo) {
+        jogadores.stream()
+                .filter(j -> j.getTime().equals(flamengo))
+                .forEach(j -> System.out.println("Jogador: "+ j.getNome() + " || "+ "Time: " + j.getTime()));
 
     }
 

@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Exercicio {
     public static void main(String[] args) {
@@ -20,26 +22,34 @@ public class Exercicio {
             jogadores.add(new Jogador(nome, posicao, idade, time, gols));
         }
 
-        System.out.println("Filtrar Todos os jogadores");
+        System.out.println("Filtrar Todos os jogadores\n");
         // filtrarTodosJogadores
         filtrarTodosJogadores(jogadores);
         System.out.println();
 
-        System.out.println("Filtrar jogadores por time");
+        System.out.println("Filtrar jogadores por time\n");
         // filtrar por time
         filtraPorTime(jogadores, "Flamengo");
         System.out.println();
 
 
-        System.out.println("Filtrar jogadores por time e gols acima de 1");
+        System.out.println("Filtrar jogadores por time e gols acima de 1\n");
         // imprimir jogadores de um determinado time que tenham mais que um
         //determinado número de gols marcados
         filtrarPorTimeAndDeterminadoGols(jogadores, "Palmeiras");
         System.out.println();
 
+        System.out.println("Filtrar jogadores agrupando os time\n");
+        // imprimir todos os jogadores, agrupando-os por time
+
+        filtrarJogadoresTimesAgrupado(jogadores);
+        System.out.println();
+
+
 
 
     }
+
 
 
 
@@ -59,11 +69,24 @@ public class Exercicio {
         jogadores.stream()
                 .filter(j -> j.getTime().equals(palmeiras))
                 .filter(j -> j.getGolsMarcados() > 1)
-                .forEach(j -> System.out.println("Jogador: "+ j.getNome() + " || "+ "Gols: " + j.getGolsMarcados() + " || "+ "Time: " + j.getTime()));
+                .forEach(j -> System.out.printf("Jogador: %s || Gols: %d || Time: %s",
+                        j.getNome(), j.getGolsMarcados(), j.getTime()));
+
+    }
+
+    private static void filtrarJogadoresTimesAgrupado(List<Jogador> jogadores) {
+
+        Map<String, List<Jogador>> jogadoresPorTime = jogadores.stream()
+                .collect(Collectors.groupingBy(Jogador::getTime));
 
 
-
-
+        jogadoresPorTime.forEach((time, listaJogadores) -> {
+            System.out.println("Time: " + time.trim());
+            for (Jogador j : listaJogadores) {
+                System.out.printf("- %s (%s)\n", j.getNome().trim(), j.getPosicao().trim());
+            }
+            System.out.println("-".repeat(20));
+        });
     }
 
 

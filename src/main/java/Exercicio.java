@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Exercicio {
@@ -55,13 +52,16 @@ public class Exercicio {
         filtrarMediaIdadeJogadorePorTime(jogadores, "Flamengo");
         System.out.println("-".repeat(100));
 
+        System.out.println("Filtrar jogador mais velho");
+        //imprimir jogador mais velho
+        filtrarJogadorMaisVelho(jogadores);
+
 
 
 
 
 
     }
-
 
 
 
@@ -119,6 +119,14 @@ public class Exercicio {
 
         System.out.printf("- Media de idade dos jogaodore do %s: %.2f anos\n", flamengo, mediaIdade);
     }
+
+    private static void filtrarJogadorMaisVelho(List<Jogador> jogadores) {
+        // Ordem decrescente (mais velho primeiro)
+        jogadores.stream()
+                .max(Comparator.comparingInt(Jogador::getIdade))
+                .ifPresent(j -> System.out.println("Jogador mais velho: " + j.getNome() + " (" + j.getIdade() + " anos)"));
+    }
+
 
 
 

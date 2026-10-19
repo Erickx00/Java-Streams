@@ -19,15 +19,29 @@ public class Exercicio {
             int gols = r.nextInt(0, 10);
             jogadores.add(new Jogador(nome, posicao, idade, time, gols));
         }
+
+        System.out.println("Filtrar Todos os jogadores");
         // filtrarTodosJogadores
         filtrarTodosJogadores(jogadores);
+        System.out.println();
 
+        System.out.println("Filtrar jogadores por time");
         // filtrar por time
         filtraPorTime(jogadores, "Flamengo");
+        System.out.println();
+
+
+        System.out.println("Filtrar jogadores por time e gols acima de 1");
+        // imprimir jogadores de um determinado time que tenham mais que um
+        //determinado número de gols marcados
+        filtrarPorTimeAndDeterminadoGols(jogadores, "Palmeiras");
+        System.out.println();
 
 
 
     }
+
+
 
     private static void filtrarTodosJogadores(List<Jogador> jogadores) {
         jogadores.forEach(System.out::println);
@@ -40,6 +54,19 @@ public class Exercicio {
                 .forEach(j -> System.out.println("Jogador: "+ j.getNome() + " || "+ "Time: " + j.getTime()));
 
     }
+
+    private static void filtrarPorTimeAndDeterminadoGols(List<Jogador> jogadores, String palmeiras) {
+        jogadores.stream()
+                .filter(j -> j.getTime().equals(palmeiras))
+                .filter(j -> j.getGolsMarcados() > 1)
+                .forEach(j -> System.out.println("Jogador: "+ j.getNome() + " || "+ "Gols: " + j.getGolsMarcados() + " || "+ "Time: " + j.getTime()));
+
+
+
+
+    }
+
+
 
 
 

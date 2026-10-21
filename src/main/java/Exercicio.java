@@ -285,6 +285,40 @@ public class Exercicio {
                 );
     }
 
+    // Somar os gols dos jogadores de um determinado time
+    private static void somarGolsPorTime(
+            List<Jogador> jogadores,
+            String time
+    ) {
+        int totalGols = jogadores.stream()
+                .filter(j -> j.getTime().equals(time))
+                .mapToInt(Jogador::getGolsMarcados)
+                .sum();
+
+        System.out.printf(
+                "Total de gols do %s: %d%n",
+                time,
+                totalGols
+        );
+    }
+
+    // Ordenar jogadores pelo número de gols (decrescente)
+    private static void ordenarJogadoresPorGols(
+            List<Jogador> jogadores
+    ) {
+        jogadores.stream()
+                .sorted(
+                        Comparator.comparingInt(Jogador::getGolsMarcados)
+                                .reversed()
+                )
+                .forEach(j -> System.out.printf(
+                        "Jogador: %s | Gols: %d | Time: %s%n",
+                        j.getNome(),
+                        j.getGolsMarcados(),
+                        j.getTime()
+                ));
+    }
+
 
     // Separador visual
     private static void imprimirSeparador() {

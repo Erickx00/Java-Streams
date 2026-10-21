@@ -1,4 +1,3 @@
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,6 +40,35 @@ public class Exercicio {
 
         System.out.println("=== JOGADOR MAIS NOVO ===");
         filtrarJogadorMaisNovo(jogadores);
+        imprimirSeparador();
+
+        System.out.println("=== JOGADOR ARTILHEIRO ===");
+        filtrarJogadorArtilheiro(jogadores);
+        imprimirSeparador();
+
+        System.out.println("=== TIME DO JOGADOR ARTILHEIRO ===");
+        filtrarTimeJogadorArtilheiro(jogadores);
+        imprimirSeparador();
+
+        System.out.println("=== SOMATÓRIO DE GOLS DO FLAMENGO ===");
+        somarGolsPorTime(jogadores, "Flamengo");
+        imprimirSeparador();
+
+        System.out.println("=== JOGADORES ORDENADOS POR GOLS ===");
+        ordenarJogadoresPorGols(jogadores);
+        imprimirSeparador();
+
+        System.out.println("=== MÉDIA DE GOLS POR TIME ===");
+        Map<String, Double> medias = calcularMediaGolsPorTime(jogadores);
+        imprimirMediasPorTime(medias);
+        imprimirSeparador();
+
+        System.out.println("=== TIMES COM MÉDIA DE GOLS ACIMA DE 3 ===");
+        filtrarTimesPorMediaDeGols(medias, 3.0);
+        imprimirSeparador();
+
+        System.out.println("=== TOTAL DE GOLS POR IDADE ===");
+        calcularGolsPorIdade(jogadores);
         imprimirSeparador();
     }
 
@@ -323,31 +351,29 @@ public class Exercicio {
     private static Map<String, Double> calcularMediaGolsPorTime(
             List<Jogador> jogadores
     ) {
-        Map<String, Double> mediaGolsPorTime = jogadores.stream()
+        return jogadores.stream()
                 .collect(Collectors.groupingBy(
                         Jogador::getTime,
                         Collectors.averagingInt(Jogador::getGolsMarcados)
                 ));
+    }
 
-        mediaGolsPorTime.forEach((time, media) ->
+    // Exibir as médias calculadas por time
+    private static void imprimirMediasPorTime(Map<String, Double> medias) {
+        medias.forEach((time, media) ->
                 System.out.printf(
                         "Time: %s | Média de gols por jogador: %.2f%n",
                         time,
                         media
                 )
         );
-
-        return mediaGolsPorTime;
     }
 
     // 2B. Filtrar times cuja média de gols supera um limite
     private static void filtrarTimesPorMediaDeGols(
-            List<Jogador> jogadores,
+            Map<String, Double> mediaGolsPorTime,
             double limite
     ) {
-        Map<String, Double> mediaGolsPorTime =
-                calcularMediaGolsPorTime(jogadores);
-
         Map<String, Double> timesFiltrados = mediaGolsPorTime.entrySet()
                 .stream()
                 .filter(e -> e.getValue() > limite)
@@ -356,10 +382,7 @@ public class Exercicio {
                         Map.Entry::getValue
                 ));
 
-        System.out.printf(
-                "%nTimes com média superior a %.2f gols:%n",
-                limite
-        );
+        System.out.printf("Times com média superior a %.2f gols:%n", limite);
 
         if (timesFiltrados.isEmpty()) {
             System.out.println("Nenhum time encontrado.");

@@ -253,6 +253,23 @@ public class Exercicio {
                 );
     }
 
+
+    // J. Imprimir o jogador artilheiro
+    private static void filtrarJogadorArtilheiro(List<Jogador> jogadores) {
+        jogadores.stream()
+                .max(Comparator.comparingInt(Jogador::getGolsMarcados))
+                .ifPresentOrElse(
+                        j -> System.out.printf(
+                                "Artilheiro: %s | Gols: %d | Time: %s%n",
+                                j.getNome(),
+                                j.getGolsMarcados(),
+                                j.getTime()
+                        ),
+                        () -> System.out.println("Nenhum jogador cadastrado.")
+                );
+    }
+
+
     // Separador visual
     private static void imprimirSeparador() {
         System.out.println("-".repeat(60));

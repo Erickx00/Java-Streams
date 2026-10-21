@@ -319,6 +319,82 @@ public class Exercicio {
                 ));
     }
 
+    // 2A. Calcular a média de gols por time
+    private static Map<String, Double> calcularMediaGolsPorTime(
+            List<Jogador> jogadores
+    ) {
+        Map<String, Double> mediaGolsPorTime = jogadores.stream()
+                .collect(Collectors.groupingBy(
+                        Jogador::getTime,
+                        Collectors.averagingInt(Jogador::getGolsMarcados)
+                ));
+
+        mediaGolsPorTime.forEach((time, media) ->
+                System.out.printf(
+                        "Time: %s | Média de gols por jogador: %.2f%n",
+                        time,
+                        media
+                )
+        );
+
+        return mediaGolsPorTime;
+    }
+
+    // 2B. Filtrar times cuja média de gols supera um limite
+    private static void filtrarTimesPorMediaDeGols(
+            List<Jogador> jogadores,
+            double limite
+    ) {
+        Map<String, Double> mediaGolsPorTime =
+                calcularMediaGolsPorTime(jogadores);
+
+        Map<String, Double> timesFiltrados = mediaGolsPorTime.entrySet()
+                .stream()
+                .filter(e -> e.getValue() > limite)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                ));
+
+        System.out.printf(
+                "%nTimes com média superior a %.2f gols:%n",
+                limite
+        );
+
+        if (timesFiltrados.isEmpty()) {
+            System.out.println("Nenhum time encontrado.");
+            return;
+        }
+
+        timesFiltrados.forEach((time, media) ->
+                System.out.printf(
+                        "Time: %s | Média: %.2f gols%n",
+                        time,
+                        media
+                )
+        );
+    }
+
+    // 3. Calcular o total de gols por idade
+    private static void calcularGolsPorIdade(
+            List<Jogador> jogadores
+    ) {
+        Map<Integer, Integer> golsPorIdade = jogadores.stream()
+                .collect(Collectors.groupingBy(
+                        Jogador::getIdade,
+                        Collectors.summingInt(Jogador::getGolsMarcados)
+                ));
+
+        golsPorIdade.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(e -> System.out.printf(
+                        "Idade: %d anos | Total de gols: %d%n",
+                        e.getKey(),
+                        e.getValue()
+                ));
+    }
+
 
     // Separador visual
     private static void imprimirSeparador() {

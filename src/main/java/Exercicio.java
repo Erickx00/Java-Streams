@@ -1,169 +1,260 @@
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Exercicio {
+
     public static void main(String[] args) {
-        String[] posicoes = {"Goleiro", "Defensor", "Meio-Campista", " Atacante" };
-        String[] times = {"Flamengo", "São Paulo", "Palmeiras", " Santos", " Corinthians", " Grêmio", " Internacional", " Fluminense", " Atlético Mineiro", " Cruzeiro" };
-        String[] nomes = {"Neymar", "Gabriel Barbosa", "Alisson", "Marquinhos", " Casemiro", "Roberto Firmino", "Thiago Silva", "Richarl ison", " Lucas Paquetá", " Éder Militão", "Vinícius Júnior", "Fabinho", "Douglas Luiz", " Everton Ribeiro", " Ederson", "Gabriel Jesus", "Danilo", "Rodrygo", "Fred", " Reinier" };
+        List<Jogador> jogadores = gerarJogadores();
 
-        List<Jogador> jogadores = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            Random r = new Random();
-            String posicao = posicoes[r.nextInt(posicoes.length)];
-            String time = times[r.nextInt(times.length)];
-            String nome = nomes[r.nextInt(nomes.length)];
-            int idade = r.nextInt(18, 40);
-            int gols = r.nextInt(0, 10);
-            jogadores.add(new Jogador(nome, posicao, idade, time, gols));
-        }
-
-        System.out.println("Filtrar Todos os jogadores\n");
-        // filtrarTodosJogadores
+        System.out.println("=== TODOS OS JOGADORES ===");
         filtrarTodosJogadores(jogadores);
-        System.out.println("-".repeat(100));
+        imprimirSeparador();
 
-        System.out.println("Filtrar jogadores por time\n");
-        // filtrar por time
+        System.out.println("=== JOGADORES DO FLAMENGO ===");
         filtraPorTime(jogadores, "Flamengo");
-        System.out.println("-".repeat(100));
+        imprimirSeparador();
 
+        System.out.println("=== JOGADORES DO PALMEIRAS COM MAIS DE 1 GOL ===");
+        filtrarPorTimeAndDeterminadoGols(jogadores, "Palmeiras", 1);
+        imprimirSeparador();
 
-        System.out.println("Filtrar jogadores por time e gols acima de 1\n");
-        // imprimir jogadores de um determinado time que tenham mais que um
-        //determinado número de gols marcados
-        filtrarPorTimeAndDeterminadoGols(jogadores, "Palmeiras");
-        System.out.println("-".repeat(100));
-
-        System.out.println("Filtrar jogadores agrupando os time\n");
-        // imprimir todos os jogadores, agrupando-os por time
-
+        System.out.println("=== JOGADORES AGRUPADOS POR TIME ===");
         filtrarJogadoresTimesAgrupado(jogadores);
-        System.out.println("-".repeat(100));
+        imprimirSeparador();
 
-        System.out.println("Filtrar media de idade dos jogadores\n");
-        // calcular média de idade dos jogadores
+        System.out.println("=== MÉDIA DE IDADE DOS JOGADORES ===");
         filtrarMediaIdadeJogadores(jogadores);
-        System.out.println("-".repeat(100));
+        imprimirSeparador();
 
-        System.out.println("Filtrar media de idade dos jogadores por time\n");
-        //calcular média de idade dos jogadores de um time
+        System.out.println("=== MÉDIA DE IDADE POR TIME ===");
         filtrarMediaIdadeJogadorePorTime(jogadores, "Flamengo");
-        System.out.println("-".repeat(100));
+        imprimirSeparador();
 
-        System.out.println("Filtrar jogador mais velho\n");
-        //imprimir jogador mais velho
+        System.out.println("=== JOGADOR MAIS VELHO ===");
         filtrarJogadorMaisVelho(jogadores);
-        System.out.println("-".repeat(100));
+        imprimirSeparador();
 
-
-
-        System.out.println("Filtrar time do jogador mais velho\n");
-        // imprimir o time do jogador mais velho
+        System.out.println("=== TIME DO JOGADOR MAIS VELHO ===");
         filtrarTimeJogadorMaisVelho(jogadores);
-        System.out.println("-".repeat(100));
+        imprimirSeparador();
 
-        System.out.println("Filtrar jogador mais novo\n");
-        //imprimir jogador mais novo
+        System.out.println("=== JOGADOR MAIS NOVO ===");
         filtrarJogadorMaisNovo(jogadores);
-        System.out.println("-".repeat(100));
-
-
-
-
-
-
+        imprimirSeparador();
     }
 
+    // Geração dos jogadores
+    private static List<Jogador> gerarJogadores() {
+        String[] posicoes = {
+                "Goleiro",
+                "Defensor",
+                "Meio-Campista",
+                "Atacante"
+        };
 
+        String[] times = {
+                "Flamengo",
+                "São Paulo",
+                "Palmeiras",
+                "Santos",
+                "Corinthians",
+                "Grêmio",
+                "Internacional",
+                "Fluminense",
+                "Atlético Mineiro",
+                "Cruzeiro"
+        };
 
+        String[] nomes = {
+                "Neymar",
+                "Gabriel Barbosa",
+                "Alisson",
+                "Marquinhos",
+                "Casemiro",
+                "Roberto Firmino",
+                "Thiago Silva",
+                "Richarlison",
+                "Lucas Paquetá",
+                "Éder Militão",
+                "Vinícius Júnior",
+                "Fabinho",
+                "Douglas Luiz",
+                "Everton Ribeiro",
+                "Ederson",
+                "Gabriel Jesus",
+                "Danilo",
+                "Rodrygo",
+                "Fred",
+                "Reinier"
+        };
 
+        List<Jogador> jogadores = new ArrayList<>();
+        Random random = new Random();
+
+        for (int i = 0; i < 20; i++) {
+            String posicao = posicoes[random.nextInt(posicoes.length)];
+            String time = times[random.nextInt(times.length)];
+            String nome = nomes[random.nextInt(nomes.length)];
+
+            int idade = random.nextInt(18, 40);
+            int gols = random.nextInt(0, 10);
+
+            jogadores.add(
+                    new Jogador(nome, posicao, idade, time, gols)
+            );
+        }
+
+        return jogadores;
+    }
+
+    // Listagem
     private static void filtrarTodosJogadores(List<Jogador> jogadores) {
         jogadores.forEach(System.out::println);
     }
 
-
-    private static void filtraPorTime(List<Jogador> jogadores, String flamengo) {
+    // Filtrar jogadores por time
+    private static void filtraPorTime(
+            List<Jogador> jogadores,
+            String time
+    ) {
         jogadores.stream()
-                .filter(j -> j.getTime().equals(flamengo))
-                .forEach(j -> System.out.println("Jogador: "+ j.getNome() + " || "+ "Time: " + j.getTime()));
-
+                .filter(j -> j.getTime().equals(time))
+                .forEach(j -> System.out.printf(
+                        "Jogador: %s | Time: %s%n",
+                        j.getNome(),
+                        j.getTime()
+                ));
     }
 
-    private static void filtrarPorTimeAndDeterminadoGols(List<Jogador> jogadores, String palmeiras) {
+    // Filtrar jogadores por time e quantidade mínima de gols
+    private static void filtrarPorTimeAndDeterminadoGols(
+            List<Jogador> jogadores,
+            String time,
+            int golsMinimos
+    ) {
         jogadores.stream()
-                .filter(j -> j.getTime().equals(palmeiras))
-                .filter(j -> j.getGolsMarcados() > 1)
-                .forEach(j -> System.out.printf("Jogador: %s || Gols: %d || Time: %s",
-                        j.getNome(), j.getGolsMarcados(), j.getTime()));
-
+                .filter(j -> j.getTime().equals(time))
+                .filter(j -> j.getGolsMarcados() > golsMinimos)
+                .forEach(j -> System.out.printf(
+                        "Jogador: %s | Gols: %d | Time: %s%n",
+                        j.getNome(),
+                        j.getGolsMarcados(),
+                        j.getTime()
+                ));
     }
 
-    private static void filtrarJogadoresTimesAgrupado(List<Jogador> jogadores) {
-
-        Map<String, List<Jogador>> jogadoresPorTime = jogadores.stream()
-                .collect(Collectors.groupingBy(Jogador::getTime));
-
+    // Agrupar jogadores por time
+    private static void filtrarJogadoresTimesAgrupado(
+            List<Jogador> jogadores
+    ) {
+        Map<String, List<Jogador>> jogadoresPorTime =
+                jogadores.stream()
+                        .collect(Collectors.groupingBy(Jogador::getTime));
 
         jogadoresPorTime.forEach((time, listaJogadores) -> {
-            System.out.println("Time: " + time.trim());
-            for (Jogador j : listaJogadores) {
-                System.out.printf("- %s (%s)\n", j.getNome().trim(), j.getPosicao().trim());
-            }
-            System.out.println("-".repeat(20));
+            System.out.println("Time: " + time);
+
+            listaJogadores.forEach(j -> System.out.printf(
+                    "- %s (%s)%n",
+                    j.getNome(),
+                    j.getPosicao()
+            ));
+
+            System.out.println("-".repeat(30));
         });
     }
 
-    private static void filtrarMediaIdadeJogadores(List<Jogador> jogadores) {
+    // Calcular média de idade de todos os jogadores
+    private static void filtrarMediaIdadeJogadores(
+            List<Jogador> jogadores
+    ) {
         double mediaIdade = jogadores.stream()
                 .mapToInt(Jogador::getIdade)
                 .average()
                 .orElse(0.0);
 
-        System.out.printf("Media de idade dos jogadores: %.2f anos\n", mediaIdade);
+        System.out.printf(
+                "Média de idade: %.2f anos%n",
+                mediaIdade
+        );
     }
 
-    private static void filtrarMediaIdadeJogadorePorTime(List<Jogador> jogadores, String flamengo) {
-        double mediaIdade = jogadores.stream()
-                .filter(e -> e.getTime().equals(flamengo))
+    // Calcular média de idade dos jogadores de um time
+    private static void filtrarMediaIdadeJogadorePorTime(
+            List<Jogador> jogadores,
+            String time
+    ) {
+        OptionalDouble mediaIdade = jogadores.stream()
+                .filter(j -> j.getTime().equals(time))
                 .mapToInt(Jogador::getIdade)
-                .average()
-                .orElse(0.0);
+                .average();
 
-        System.out.printf("- Media de idade dos jogaodore do %s: %.2f anos\n", flamengo, mediaIdade);
+        if (mediaIdade.isPresent()) {
+            System.out.printf(
+                    "Média de idade do %s: %.2f anos%n",
+                    time,
+                    mediaIdade.getAsDouble()
+            );
+        } else {
+            System.out.println(
+                    "Nenhum jogador encontrado para o time " + time
+            );
+        }
     }
 
-    private static void filtrarJogadorMaisVelho(List<Jogador> jogadores) {
-        // Ordem decrescente (mais velho primeiro)
+    // Encontrar o jogador mais velho
+    private static void filtrarJogadorMaisVelho(
+            List<Jogador> jogadores
+    ) {
         jogadores.stream()
                 .max(Comparator.comparingInt(Jogador::getIdade))
-                .ifPresent(j -> System.out.println("Jogador mais velho: " + j.getNome() + " (" + j.getIdade() + " anos)"));
+                .ifPresentOrElse(
+                        j -> System.out.printf(
+                                "Jogador mais velho: %s (%d anos)%n",
+                                j.getNome(),
+                                j.getIdade()
+                        ),
+                        () -> System.out.println("Nenhum jogador cadastrado.")
+                );
     }
 
-    private static void filtrarTimeJogadorMaisVelho(List<Jogador> jogadores) {
-        Jogador jogador = jogadores.stream()
-                .max(Comparator.comparing(Jogador::getIdade))
-                .orElse(null);
+    // Encontrar o time do jogador mais velho
+    private static void filtrarTimeJogadorMaisVelho(
+            List<Jogador> jogadores
+    ) {
+        jogadores.stream()
+                .max(Comparator.comparingInt(Jogador::getIdade))
+                .ifPresentOrElse(
+                        j -> {
+                            System.out.println(
+                                    "Time do jogador mais velho: " + j.getTime()
+                            );
 
-        assert jogador != null;
-        System.out.println("Time: " + jogador.getTime()+"\n");
-        filtraPorTime(jogadores, jogador.getTime());
+                            filtraPorTime(jogadores, j.getTime());
+                        },
+                        () -> System.out.println("Nenhum jogador cadastrado.")
+                );
     }
 
-    private static void filtrarJogadorMaisNovo(List<Jogador> jogadores) {
+    // Encontrar o jogador mais novo
+    private static void filtrarJogadorMaisNovo(
+            List<Jogador> jogadores
+    ) {
         jogadores.stream()
                 .min(Comparator.comparingInt(Jogador::getIdade))
-                .ifPresent(j -> System.out.printf("Jogador mais novo : %s (%s anos)", j.getNome(), j.getIdade()));
+                .ifPresentOrElse(
+                        j -> System.out.printf(
+                                "Jogador mais novo: %s (%d anos)%n",
+                                j.getNome(),
+                                j.getIdade()
+                        ),
+                        () -> System.out.println("Nenhum jogador cadastrado.")
+                );
     }
 
-
-
-
-
-
-
-
-
-
+    // Separador visual
+    private static void imprimirSeparador() {
+        System.out.println("-".repeat(60));
+    }
 }

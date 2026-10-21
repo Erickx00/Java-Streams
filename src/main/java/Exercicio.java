@@ -254,7 +254,7 @@ public class Exercicio {
     }
 
 
-    // J. Imprimir o jogador artilheiro
+    // Imprimir o jogador artilheiro
     private static void filtrarJogadorArtilheiro(List<Jogador> jogadores) {
         jogadores.stream()
                 .max(Comparator.comparingInt(Jogador::getGolsMarcados))
@@ -263,6 +263,22 @@ public class Exercicio {
                                 "Artilheiro: %s | Gols: %d | Time: %s%n",
                                 j.getNome(),
                                 j.getGolsMarcados(),
+                                j.getTime()
+                        ),
+                        () -> System.out.println("Nenhum jogador cadastrado.")
+                );
+    }
+
+    // Imprimir o time do jogador artilheiro
+    private static void filtrarTimeJogadorArtilheiro(
+            List<Jogador> jogadores
+    ) {
+        jogadores.stream()
+                .max(Comparator.comparingInt(Jogador::getGolsMarcados))
+                .ifPresentOrElse(
+                        j -> System.out.printf(
+                                "Artilheiro: %s | Time: %s%n",
+                                j.getNome(),
                                 j.getTime()
                         ),
                         () -> System.out.println("Nenhum jogador cadastrado.")

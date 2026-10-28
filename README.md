@@ -1,74 +1,75 @@
-Java Streams API
 
-Repositório destinado à prática de exercícios sobre a Streams API em Java, utilizando a linguagem Java e o Maven para organização do projeto.
+# Java Streams API ☕
 
-📚 Sobre o projeto
+Repositório destinado à prática de exercícios sobre a Streams API em Java, utilizando Maven para a organização do projeto.
 
-Este projeto foi desenvolvido com o objetivo de praticar o processamento e a manipulação de coleções em Java por meio da Streams API.
+## 📚 Sobre o projeto
 
-Os exercícios exploram operações que permitem filtrar, transformar, ordenar e analisar dados de maneira declarativa, utilizando recursos da programação funcional disponíveis na linguagem.
+O objetivo deste projeto é praticar o processamento e a manipulação de coleções utilizando a Streams API, explorando recursos da programação funcional disponíveis no Java.
 
-🎯 Objetivos
+## 🎯 Conteúdos estudados
 
-- Compreender o funcionamento da Streams API.
-- Praticar expressões lambda e referências a métodos.
-- Manipular listas e outras coleções.
-- Aplicar operações intermediárias e terminais.
-- Resolver problemas utilizando operações funcionais.
-- Desenvolver códigos mais legíveis e organizados.
+- Streams API
+- Expressões Lambda
+- Programação funcional
+- Filter
+- Map
+- Reduce
+- Collectors
+- Operações estatísticas
+- Agrupamento de dados
+- Streams paralelas
+- Exercícios práticos de aplicação
 
-🛠️ Tecnologias utilizadas
+## 🛠️ Tecnologias utilizadas
 
 - Java 21
 - Maven
-- Streams API
-- Collections Framework
-- Lambda Expressions
+- IntelliJ IDEA
 
-📂 Estrutura do projeto
+## 📂 Estrutura do projeto
 
+```text
 Java-Streams/
 ├── src/
-│   └── main/
-│       └── java/
+│   ├── main/
+│   │   └── java/
+│   └── test/
 ├── .gitignore
 ├── pom.xml
 └── README.md
+````
 
-⚙️ Pré-requisitos
+### 🚀 Como executar
 
-Para executar o projeto, é necessário ter instalado:
+### 1\. Clone o repositório
 
-- JDK 21 ou compatível com a configuração do projeto.
-- Maven ou uma IDE com suporte ao Maven, como IntelliJ IDEA.
+```bash
+git clone https://github.com/Erickx00/Java-Streams.git
+```
 
-▶️ Como executar
+### 2\. Acesse a pasta do projeto
 
-1. Clone o repositório:
-   
-   git clone https://github.com/Erickx00/Java-Streams.git
+```bash
+cd Java-Streams
+```
 
-2. Entre na pasta do projeto:
-   
-   cd Java-Streams
+### 3\. Abra o projeto na sua IDE
 
-3. Abra o projeto na IDE de sua preferência.
+Importe o projeto Maven no IntelliJ IDEA ou em outra IDE compatível e execute as classes Java correspondentes aos exercícios.
 
-4. Execute a classe Java que contém o exercício desejado.
+### 📖 Referências
 
-📖 Referências
+* [Documentação oficial da Stream API — Java 21](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html?utm_source=chatgpt.com)
 
-- "Documentação oficial da Stream API" (https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/stream/package-summary.html)
-- "Documentação oficial do Java 21" (https://docs.oracle.com/en/java/javase/21/)
+* [Documentação oficial do Java 21](https://docs.oracle.com/en/java/javase/21/?utm_source=chatgpt.com)
 
-👨‍💻 Autor
+### 👨‍💻 Autor
 
 Erick Lucas
 
 Estudante de Análise e Desenvolvimento de Sistemas (ADS).
 
-- GitHub: "@Erickx00" (https://github.com/Erickx00)
+\- GitHub: [Erickx00](https://github.com/Erickx00?utm_source=chatgpt.com)
 
----
-
-Projeto desenvolvido para fins educacionais e prática de programação em Java.
+Projeto desenvolvido para fins educacionais, com foco no aprendizado e na prática da Streams API em Java.
